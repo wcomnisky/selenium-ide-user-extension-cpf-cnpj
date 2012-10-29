@@ -1,7 +1,4 @@
-Selenium.prototype.doGenerateCNPJ = function(locator) {
-	// All locator-strategies are automatically handled by "findElement"
-	var element = this.page().findElement(locator);
-	
+Selenium.prototype.generateCnpj = function() {
 	var n1 = Math.floor(Math.random()*10);
 	var n2 = Math.floor(Math.random()*10);
 	var n3 = Math.floor(Math.random()*10);
@@ -14,7 +11,7 @@ Selenium.prototype.doGenerateCNPJ = function(locator) {
 	var n10 = 0;
 	var n11 = 0;
 	var n12 = 1;
-	
+
 	var d1 = (n12*2)+(n11*3)+(n10*4)+(n9*5)+(n8*6)+(n7*7)+(n6*8)+(n5*9)+(n4*2)+(n3*3)+(n2*4)+(n1*5);
 	d1 = (11-(d1%11));
 	if(d1 >= 10)
@@ -27,18 +24,22 @@ Selenium.prototype.doGenerateCNPJ = function(locator) {
 	{
 		d2 = 0;
 	}
-	
-	var cnpj = ''+n1+n2+n3+n4+n5+n6+n7+n8+n9+n10+n11+n12+d1+d2;
-	var valueToType = cnpj;
+
+	return ''+n1+n2+n3+n4+n5+n6+n7+n8+n9+n10+n11+n12+d1+d2;	
+}
+
+Selenium.prototype.doGenerateCNPJ = function(locator) {
+	// All locator-strategies are automatically handled by "findElement"
+	var element = this.page().findElement(locator);
+
+	var valueToType = this.generateCnpj();
 
 	//Todos os direitos reservados. @Maurício Avellar
 	// Replace the element text with the new text
 	this.page().replaceText(element, valueToType);
 };
-	
-Selenium.prototype.doGenerateCPF = function(locator) {
-	// All locator-strategies are automatically handled by "findElement"
-	var element = this.page().findElement(locator);
+
+Selenium.prototype.generateCpf = function() {
 
 	var n1 = Math.floor(Math.random()*10);
 	var n2 = Math.floor(Math.random()*10);
@@ -49,7 +50,7 @@ Selenium.prototype.doGenerateCPF = function(locator) {
 	var n7 = Math.floor(Math.random()*10);
 	var n8 = Math.floor(Math.random()*10);
 	var n9 = Math.floor(Math.random()*10);
-
+	
 	var d1 = (n1*10)+(n2*9)+(n3*8)+(n4*7)+(n5*6)+(n6*5)+(n7*4)+(n8*3)+(n9*2);
 	d1 = (11-(d1%11));
 	if(d1 >= 10)
@@ -62,10 +63,16 @@ Selenium.prototype.doGenerateCPF = function(locator) {
 	{
 		d2 = 0;
 	}
+	
+	return ''+n1+n2+n3+n4+n5+n6+n7+n8+n9+d1+d2;	
+};
 
-	var cpf = ''+n1+n2+n3+n4+n5+n6+n7+n8+n9+d1+d2;
-	var valueToType = cpf;
-
+Selenium.prototype.doGenerateCPF = function(locator) {
+	// All locator-strategies are automatically handled by "findElement"
+	var element = this.page().findElement(locator);
+	
+	var valueToType = this.generateCpf();
+	
 	//Todos os direitos reservados. @Maurício Avellar
 	// Replace the element text with the new text
 	this.page().replaceText(element, valueToType);
