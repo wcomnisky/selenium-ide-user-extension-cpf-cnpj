@@ -1,0 +1,2 @@
+selenium-ide-user-extension
+===========================
